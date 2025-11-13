@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Medicines Near Expiry (Next 30 Days)</h2>
+
+{% if medicines %}
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Name</th>
+        <th>Expiry Date</th>
+        <th>Quantity</th>
+    </tr>
+    {% for med in medicines %}
+    <tr style="background-color:#ffe28a;">
+        <td>{{ med[1] }}</td>
+        <td>{{ med[2] }}</td>
+        <td>{{ med[3] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No medicines expiring soon ✅</p>
+{% endif %}
+
+{% endblock %}

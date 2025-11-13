@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Medicine App{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="navbar">
+    <div class="nav-left">Medicine Expiry Tracker</div>
+    <div class="nav-right">
+      {% if user %}
+        <span class="user-pill">Hello, {{ user['username'] }}</span>
+        <a href="{{ url_for('logout') }}" class="small-link">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="small-link">Login</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap">
+          {% for category, msg in messages %}
+            <div class="flash {{ category }}">{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer class="footer">
+    &copy; {{ datetime.utcnow().year }} Medicine Tracker
+  </footer>
+</body>
+</html>
